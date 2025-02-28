@@ -1,0 +1,3 @@
+/Users/aignatova/Study/1course/C++/Homework_1/CMakeFiles/longNum_lib.dir
+/Users/aignatova/Study/1course/C++/Homework_1/CMakeFiles/edit_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_1/CMakeFiles/rebuild_cache.dir
