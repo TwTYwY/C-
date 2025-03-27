@@ -11,7 +11,6 @@ private:
       std::vector<char> binFractionalPart;
       int accuracy;
       bool sign;
-      friend void outputLN(const LongNum &num);
 public:
       LongNum();
       LongNum(const std::string &num);
