@@ -1,0 +1,11 @@
+/Users/aignatova/Study/1course/C++/Homework_2/build/CMakeFiles/expressionDerivative_lib.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/CMakeFiles/differentiator.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/CMakeFiles/tests.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/CMakeFiles/edit_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/CMakeFiles/rebuild_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-build/CMakeFiles/edit_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-build/CMakeFiles/rebuild_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-build/src/CMakeFiles/Catch2.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-build/src/CMakeFiles/edit_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-build/src/CMakeFiles/rebuild_cache.dir

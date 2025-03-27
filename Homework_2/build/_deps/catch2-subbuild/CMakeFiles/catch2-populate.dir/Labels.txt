@@ -1,0 +1,14 @@
+# Target labels
+ catch2-populate
+# Source files and their labels
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate-complete.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-build.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-configure.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-download.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-install.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-mkdir.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-patch.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-test.rule
+/Users/aignatova/Study/1course/C++/Homework_2/build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-update.rule
