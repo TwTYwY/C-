@@ -1,3 +1,10 @@
 /Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/longNum_lib.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/tutor_tests.dir
 /Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-build/CMakeFiles/edit_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-build/CMakeFiles/rebuild_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-build/src/CMakeFiles/Catch2.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-build/src/CMakeFiles/edit_cache.dir
+/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-build/src/CMakeFiles/rebuild_cache.dir

@@ -900,3 +900,40 @@ events:
       LTO support using: LLVM version 15.0.0 (static support for 29, runtime is 29)
       TAPI support using: Apple TAPI version 15.0.0 (tapi-1500.3.2.2)
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/opt/homebrew/share/cmake/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake-build-debug/_deps/catch2-src/CMake/CatchMiscFunctions.cmake:12 (check_cxx_compiler_flag)"
+      - "cmake-build-debug/_deps/catch2-src/CMake/CatchMiscFunctions.cmake:120 (add_cxx_flag_if_supported_to_targets)"
+      - "cmake-build-debug/_deps/catch2-src/src/CMakeLists.txt:352 (add_build_reproducibility_settings)"
+    checks:
+      - "Performing Test HAVE_FLAG__ffile_prefix_map__Users_aignatova_Study_1course_C___Homework_1_cmake_build_debug__deps_catch2_src__"
+    directories:
+      source: "/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-o0gwwG"
+      binary: "/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-o0gwwG"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-src/extras;/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-src/CMake"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk"
+    buildResult:
+      variable: "HAVE_FLAG__ffile_prefix_map__Users_aignatova_Study_1course_C___Homework_1_cmake_build_debug__deps_catch2_src__"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-o0gwwG'
+        
+        Run Build Command(s): /Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -v cmTC_a51b4
+        [1/2] /Library/Developer/CommandLineTools/usr/bin/c++ -DHAVE_FLAG__ffile_prefix_map__Users_aignatova_Study_1course_C___Homework_1_cmake_build_debug__deps_catch2_src__  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk   -ffile-prefix-map=/Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/_deps/catch2-src/= -MD -MT CMakeFiles/cmTC_a51b4.dir/src.cxx.o -MF CMakeFiles/cmTC_a51b4.dir/src.cxx.o.d -o CMakeFiles/cmTC_a51b4.dir/src.cxx.o -c /Users/aignatova/Study/1course/C++/Homework_1/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-o0gwwG/src.cxx
+        [2/2] : && /Library/Developer/CommandLineTools/usr/bin/c++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/cmTC_a51b4.dir/src.cxx.o -o cmTC_a51b4   && :
+        
+      exitCode: 0
+...

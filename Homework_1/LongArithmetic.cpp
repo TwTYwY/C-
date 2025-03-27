@@ -37,19 +37,22 @@ std::vector<char> IntegerToBin(const std::string num) {
             reminder = currentEl % 2;
             integerPart[i] = currentEl / 2;
         }
-        result.push_back((char)reminder);
-        while (integerPart[0] == 0) {
+        if (reminder == 0) {
+            result.push_back('0');
+        } else {
+            result.push_back('1');
+        }
+        if (integerPart[0] == 0) {
             integerPart.erase(integerPart.begin());
         }
     }
-    result.push_back('1');
     std::reverse(result.begin(), result.end());
     return result;
 }
 
 std::vector<char> FractionalToBin(const std::string num, int accuracy) {
     std::string stringFractional;
-    std::vector<char> result;
+    std::vector<char> result(0);
     std::vector<int> fractionalPart;
     if (num.find('.') != std::string::npos) {
         stringFractional = num.substr(num.find('.') + 1);
@@ -65,17 +68,21 @@ std::vector<char> FractionalToBin(const std::string num, int accuracy) {
     std::reverse(fractionalPart.begin(), fractionalPart.end());
     int reminder;
     int currentEl;
-    while (!fractionalPart.empty() || (accuracy <= result.size())) {
+    while ((!fractionalPart.empty()) && (accuracy > result.size())) {
         reminder = 0;
         for (int j = 0; j < fractionalPart.size(); j++) {
             currentEl = (fractionalPart[j] * 2 + reminder) % 10;
             reminder = (fractionalPart[j] * 2 + reminder) / 10;
             fractionalPart[j] = currentEl;
         }
-        while (fractionalPart[0] == 0) {
+        if (reminder == 0) {
+            result.push_back('0');
+        } else {
+            result.push_back('1');
+        }
+        while ((fractionalPart[0] == 0) && (!fractionalPart.empty())) {
             fractionalPart.erase(fractionalPart.begin());
         }
-        result.push_back((char)reminder);
     }
     while (accuracy > result.size()) {
         result.push_back('0');
@@ -87,13 +94,9 @@ LongNum::LongNum() : binIntegerPart(std::vector<char>()), binFractionalPart(std:
 
 LongNum::LongNum(const std::string &num)
 :   binIntegerPart(IntegerToBin(num)),
-    binFractionalPart(std::vector<char>()),
-    accuracy(0),
+    binFractionalPart(FractionalToBin(num, 100)),
+    accuracy(100),
     sign(false) { //положительное
-        if (num.find('.') != std::string::npos) {
-            accuracy = num.length() - num.find('.');
-            binFractionalPart = FractionalToBin(num, accuracy);
-        }
         if(num[0] == '-') {
             sign = true; //отрицательное
         }
@@ -155,7 +158,7 @@ LongNum LongNum::operator+(const LongNum &other) const{
         fractionalA.push_back(binFractionalPart[i] - '0');
     }
     for (int i = 0; i < other.accuracy; i++) {
-        fractionalB.push_back(other.binIntegerPart[i] - '0');
+        fractionalB.push_back(other.binFractionalPart[i] - '0');
     }
     while (fractionalA.size() < result.accuracy) {
         fractionalA.push_back(0);
@@ -167,12 +170,12 @@ LongNum LongNum::operator+(const LongNum &other) const{
     std::reverse(fractionalB.begin(), fractionalB.end());
     int reminder = 0;
     for (int i = 0; i < result.accuracy; i++) {
-        reminder = (fractionalA[i] + fractionalB[i] + reminder) / 2;
         if (((fractionalA[i] + fractionalB[i] + reminder) % 2) == 0) {
-            result.binIntegerPart.push_back('0');
+            result.binFractionalPart.push_back('0');
         } else {
-            result.binIntegerPart.push_back('1');
+            result.binFractionalPart.push_back('1');
         }
+        reminder = (fractionalA[i] + fractionalB[i] + reminder) / 2;
     }
     std::reverse(result.binFractionalPart.begin(), result.binFractionalPart.end());
     std::vector<int> integerA;
@@ -192,12 +195,12 @@ LongNum LongNum::operator+(const LongNum &other) const{
         integerB.push_back(0);
     }
     for (int i = 0; i < std::max(integerA.size(), integerB.size()); i++) {
-        reminder = (integerA[i] + integerB[i] + reminder) / 2;
         if (((integerA[i] + integerB[i] + reminder) % 2) == 0) {
             result.binIntegerPart.push_back('0');
         } else {
             result.binIntegerPart.push_back('1');
         }
+        reminder = (integerA[i] + integerB[i] + reminder) / 2;
     }
     if (reminder != 0) {
         result.binIntegerPart.push_back('1');
@@ -386,70 +389,71 @@ LongNum LongNum::operator-(const LongNum &other) const{
 LongNum LongNum::operator*(const LongNum &other) const {
     LongNum result;
     result.sign = sign ^ other.sign;
-    result.accuracy = std::max(accuracy, other.accuracy);
-    int numsAfterDot = accuracy + other.accuracy;
+    result.accuracy = accuracy + other.accuracy;
     std::vector<int> A, B;
     for (int i = 0; i < binIntegerPart.size(); i++) {
-        A.push_back(binIntegerPart[i]);
+        A.push_back(binIntegerPart[i] - '0');
     }
     for (int i = 0; i < binFractionalPart.size(); i++) {
-        A.push_back(binFractionalPart[i]);
+        A.push_back(binFractionalPart[i] - '0');
     }
     for (int i = 0; i < other.binIntegerPart.size(); i++) {
-        B.push_back(other.binIntegerPart[i]);
+        B.push_back(other.binIntegerPart[i] - '0');
     }
     for (int i = 0; i < other.binFractionalPart.size(); i++) {
-        B.push_back(other.binFractionalPart[i]);
+        B.push_back(other.binFractionalPart[i] - '0');
     }
     std::reverse(A.begin(), A.end());
     std::reverse(B.begin(), B.end());
-    std::vector<int> C, D;
-    int reminder = 0;
-    for (int i = 0; i < A.size(); i++) {
-        C.push_back((A[i] * B[0] + reminder)%2);
-        reminder = (A[i] * B[0] + reminder)/2;
+    std::vector<int> C(A.size() + B.size(), 0);
+    for (size_t i = 0; i < B.size(); i++) {
+        if (B[i] == 1) {
+            int carry = 0;
+            for (size_t j = 0; j < A.size(); j++) {
+                int sum = C[i + j] + A[j] + carry;
+                C[i + j] = sum % 2;
+                carry = sum / 2;
+            }
+            if (carry) {
+                C[i + A.size()] += carry;
+            }
+        }
     }
-    for (int i = 1; i < B.size(); i++) {
-        reminder = 0;
-        for (int j = 0; j < i; j++) {
-            D.push_back(0);
-        }
-        for (int j = 0; j < A.size(); j++) {
-            D.push_back((A[j] * B[i] + reminder)%2);
-            reminder = (A[j] * B[i] + reminder)/2;
-        }
-        if (C.size() < D.size()) {
-            C.push_back(0);
-        }
-        if (D.size() < C.size()) {
-            D.push_back(0);
-        }
-        reminder = 0;
-        int helpEl;
-        for (int j = 0; j < C.size(); j++) {
-            helpEl = (C[j] + D[j] + reminder) % 2;
-            reminder = (C[j] + D[j]) / 2;
-            C[j] = helpEl;
-        }
-        if (reminder != 0) {
-            C.push_back(reminder);
-        }
-        D.clear();
+    while (C.size() > 1 && C.back() == 0) {
+        C.pop_back();
     }
-    for (int i = 0; i < numsAfterDot; i++) {
-        result.binFractionalPart.push_back((char) (C[i]));
+    size_t intSize;
+    if (C.size() > result.accuracy) {
+        intSize = C.size() - result.accuracy;
+    } else {
+        intSize = 1;
     }
-    std::reverse(result.binFractionalPart.begin(), result.binFractionalPart.end());
+    while (C.size() <= result.accuracy) {
+        C.push_back(0);
+    }
+    std::reverse(C.begin(), C.end());
+    for (int i = 0; i < intSize; i++) {
+        if (C[i] == 0) {
+            result.binIntegerPart.push_back('0');
+        } else {
+            result.binIntegerPart.push_back('1');
+        }
+    }
+    for (int i = intSize; i < result.accuracy; i++) {
+        if (C[i] == 0) {
+            result.binFractionalPart.push_back('0');
+        } else {
+            result.binFractionalPart.push_back('1');
+        }
+    }
+    if (accuracy > other.accuracy) {
+        result.accuracy = accuracy;
+    } else {
+        result.accuracy = other.accuracy;
+    }
     while (result.binFractionalPart.size() > result.accuracy) {
         result.binFractionalPart.pop_back();
     }
-    while (result.binFractionalPart.size() < result.accuracy) {
-        result.binFractionalPart.push_back(0);
-    }
-    for (int i = numsAfterDot; i < C.size(); i++) {
-        result.binIntegerPart.push_back((char) (C[i]));
-    }
-    std::reverse(result.binIntegerPart.begin(), result.binIntegerPart.end());
     return result;
 }
 
@@ -466,9 +470,34 @@ bool LongNum::operator==(const LongNum &other) const{
             }
         }
         return true;
-    } else {
+    } else if (binIntegerPart.size() != other.binIntegerPart.size()) {
         return false;
+    } else if (binFractionalPart.size() > other.binFractionalPart.size()) {
+        for (int i = 0; i < other.binFractionalPart.size(); i++) {
+            if (other.binFractionalPart[i] != binFractionalPart[i]) {
+                return false;
+            }
+        }
+        for (int i = other.binFractionalPart.size(); i < binFractionalPart.size(); i++) {
+            if (binFractionalPart[i] != '0') {
+                return false;
+            }
+        }
+        return true;
+    } else if (binFractionalPart.size() < other.binFractionalPart.size()) {
+        for (int i = 0; i < binFractionalPart.size(); i++) {
+            if (other.binFractionalPart[i] != binFractionalPart[i]) {
+                return false;
+            }
+        }
+        for (int i = binFractionalPart.size(); i < other.binFractionalPart.size(); i++) {
+            if (other.binFractionalPart[i] != '0') {
+                return false;
+            }
+        }
+        return true;
     }
+    return false;
 }
 
 bool LongNum::operator!=(const LongNum &other) const {
@@ -502,4 +531,42 @@ bool LongNum::operator<(const LongNum &other) const {
 
 bool LongNum::operator>(const LongNum &other) const {
     return (!(*this < other) && !(*this == other));
+}
+
+void outputLN(const LongNum &num) {
+    if (num.sign) {
+        std::cout << '-';
+    }
+    for (int i = 0; i < num.binIntegerPart.size(); i++) {
+        std::cout << num.binIntegerPart[i];
+    }
+    std::cout << '.';
+    for (int i = 0; i < num.accuracy; i++) {
+        std::cout << num.binFractionalPart[i];
+    }
+}
+
+bool testThatPlusWorksCorrectly() {
+    LongNum a("1.25", 10);
+    outputLN(a);
+    std::cout << " a" <<"\n";
+    LongNum b("1.25", 3);
+    outputLN(b);
+    std::cout << " b" << "\n";
+    LongNum res = a * b;
+    outputLN(res);
+    std::cout << "\n";
+    LongNum expected("1");
+    outputLN(expected);
+    std::cout << "\n";
+
+    return a == b;
+}
+
+int main(int argc, char **argv) {
+    if(testThatPlusWorksCorrectly()) {
+        std::cout << "OK" << std::endl;
+    } else {
+        std::cout << "FAIL" << std::endl;
+    }
 }

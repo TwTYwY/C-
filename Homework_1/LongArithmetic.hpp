@@ -11,6 +11,7 @@ private:
       std::vector<char> binFractionalPart;
       int accuracy;
       bool sign;
+      friend void outputLN(const LongNum &num);
 public:
       LongNum();
       LongNum(const std::string &num);
@@ -21,10 +22,10 @@ public:
       LongNum operator+(const LongNum &other) const;
       LongNum operator-(const LongNum &other) const;
       LongNum operator*(const LongNum &other) const;
-      LongNum operator/(const LongNum &other) const;
       bool operator==(const LongNum &other) const;
       bool operator!=(const LongNum &other) const;
       bool operator<(const LongNum &other) const;
       bool operator>(const LongNum &other) const;
 };
+void outputLN(const LongNum &num);
 #endif
